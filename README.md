@@ -13,7 +13,7 @@ To use the Fluence_Graph_GUI:
 
 To use the Thickness_Graph_GUI:
 
-	1.  For base folder path, choose "SPENVIS_ANALYSIS_DATA > Box_phantom"
+	1. For base folder path, choose "SPENVIS_ANALYSIS_DATA > Box_phantom"
 	2. Enter the number of mission days ion the entrybox
 	3. Choose the wanted volume name
 	4. To display the data click 'Plot Graph'
