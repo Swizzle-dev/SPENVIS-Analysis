@@ -1,0 +1,83 @@
+<gdml xsi:noNamespaceSchemaLocation="gdml.xsd">
+<define>
+<constant name="PI" value="1.*pi"/>
+<constant name="TWOPI" value="2.*pi"/>
+<position name="center"/>
+<position name="p01" x="0.000E+00" y="0.000E+00" z="0.000E+00"/>
+<position name="t01" x="0.000E+00" y="0.000E+00" z="0.000E+00"/>
+<rotation name="r01" x="0.000E+00" y="0.000E+00" z="-.000E+00"/>
+<position name="p02" x="0.000E+00" y="0.000E+00" z="0.000E+00"/>
+<position name="t02" x="0.000E+00" y="0.000E+00" z="0.000E+00"/>
+<rotation name="r02" x="0.000E+00" y="0.000E+00" z="-.000E+00"/>
+<position name="t03" x="0.000E+00" y="0.000E+00" z="0.000E+00"/>
+<rotation name="r03" x="0.000E+00" y="0.000E+00" z="-.000E+00"/>
+<rotation name="identity"/>
+</define>
+<materials>
+<define>
+<quantity type="density" name="universe_mean_density" value="1.e-25" unit="g/cm3"/>
+</define>
+<material name="Vacuum" Z="1.0">
+<T value="2.73"/>
+<P value="3.0E-18" unit="pascal"/>
+<Dref ref="universe_mean_density"/>
+<atom value="1.01"/>
+</material>
+</materials>
+<solids>
+<box name="sWorld" x="6.619E+03" y="6.619E+03" z="6.619E+03"/>
+<tube name="s01_out" z="1.500E+03" rmax="1.475E+03" deltaphi="TWOPI"/>
+<tube name="s01_in" z="1.463E+03" rmax="1.456E+03" deltaphi="TWOPI"/>
+<subtraction name="s01">
+<first ref="s01_out"/>
+<second ref="s01_in"/>
+<positionref ref="p01"/>
+<rotationref ref="identity"/>
+</subtraction>
+<box name="s02_out" x="3.800E+02" y="2.300E+02" z="6.000E+02"/>
+<box name="s02_in" x="3.600E+02" y="2.100E+02" z="5.800E+02"/>
+<subtraction name="s02">
+<first ref="s02_out"/>
+<second ref="s02_in"/>
+<positionref ref="p02"/>
+<rotationref ref="identity"/>
+</subtraction>
+<box name="s03" x="3.700E+02" y="2.200E+02" z="5.900E+02"/>
+</solids>
+<structure>
+<volume name="v01">
+<materialref ref="G4_Al"/>
+<solidref ref="s01"/>
+</volume>
+<volume name="v02">
+<materialref ref="G4_A-150_TISSUE"/>
+<solidref ref="s02"/>
+</volume>
+<volume name="v03">
+<materialref ref="G4_BLOOD_ICRP"/>
+<solidref ref="s03"/>
+</volume>
+<volume name="World">
+<materialref ref="Vacuum"/>
+<solidref ref="sWorld"/>
+<physvol>
+<volumeref ref="v01"/>
+<positionref ref="t01"/>
+<rotationref ref="r01"/>
+</physvol>
+<physvol>
+<volumeref ref="v02"/>
+<positionref ref="t02"/>
+<rotationref ref="r02"/>
+</physvol>
+<physvol>
+<volumeref ref="v03"/>
+<positionref ref="t03"/>
+<rotationref ref="r03"/>
+</physvol>
+</volume>
+</structure>
+<setup name="SSAT" version="1.0">
+<world ref="World"/>
+</setup>
+</gdml>
